@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.base.TbPetDetailedInfoMapper">
+  <resultMap id="BaseResultMap" type="com.work.domain.TbPetDetailedInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="varietyname" jdbcType="VARCHAR" property="varietyname" />
+    <result column="varietryentname" jdbcType="VARCHAR" property="varietryentname" />
+    <result column="picpath" jdbcType="VARCHAR" property="picpath" />
+    <result column="popularity" jdbcType="INTEGER" property="popularity" />
+    <result column="placeorigin" jdbcType="VARCHAR" property="placeorigin" />
+    <result column="life" jdbcType="VARCHAR" property="life" />
+    <result column="aliias" jdbcType="VARCHAR" property="aliias" />
+    <result column="femaleheight" jdbcType="VARCHAR" property="femaleheight" />
+    <result column="maleheight" jdbcType="VARCHAR" property="maleheight" />
+    <result column="brifeintro" jdbcType="VARCHAR" property="brifeintro" />
+    <result column="history" jdbcType="VARCHAR" property="history" />
+    <result column="petcharacter" jdbcType="VARCHAR" property="petcharacter" />
+    <result column="fitpeople" jdbcType="VARCHAR" property="fitpeople" />
+    <result column="haircarding" jdbcType="VARCHAR" property="haircarding" />
+    <result column="varietyvlaue" jdbcType="VARCHAR" property="varietyvlaue" />
+    <result column="breed" jdbcType="VARCHAR" property="breed" />
+    <result column="diseasepre" jdbcType="VARCHAR" property="diseasepre" />
+    <result column="attention" jdbcType="VARCHAR" property="attention" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, varietyname, varietryentname, picpath, popularity, placeorigin, life, aliias, 
+    femaleheight, maleheight, brifeintro, history, petcharacter, fitpeople, haircarding, 
+    varietyvlaue, breed, diseasepre, attention, createtime, updatetime
+  </sql>
+  <select id="selectByExample" parameterType="com.work.domain.TbPetDetailedInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_pet_detailed_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_pet_detailed_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_pet_detailed_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.work.domain.TbPetDetailedInfoExample">
+    delete from tb_pet_detailed_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.work.domain.TbPetDetailedInfo">
+    insert into tb_pet_detailed_info (id, varietyname, varietryentname, 
+      picpath, popularity, placeorigin, 
+      life, aliias, femaleheight, 
+      maleheight, brifeintro, history, 
+      petcharacter, fitpeople, haircarding, 
+      varietyvlaue, breed, diseasepre, 
+      attention, createtime, updatetime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{varietyname,jdbcType=VARCHAR}, #{varietryentname,jdbcType=VARCHAR}, 
+      #{picpath,jdbcType=VARCHAR}, #{popularity,jdbcType=INTEGER}, #{placeorigin,jdbcType=VARCHAR}, 
+      #{life,jdbcType=VARCHAR}, #{aliias,jdbcType=VARCHAR}, #{femaleheight,jdbcType=VARCHAR}, 
+      #{maleheight,jdbcType=VARCHAR}, #{brifeintro,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR}, 
+      #{petcharacter,jdbcType=VARCHAR}, #{fitpeople,jdbcType=VARCHAR}, #{haircarding,jdbcType=VARCHAR}, 
+      #{varietyvlaue,jdbcType=VARCHAR}, #{breed,jdbcType=VARCHAR}, #{diseasepre,jdbcType=VARCHAR}, 
+      #{attention,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.work.domain.TbPetDetailedInfo">
+    insert into tb_pet_detailed_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="varietyname != null">
+        varietyname,
+      </if>
+      <if test="varietryentname != null">
+        varietryentname,
+      </if>
+      <if test="picpath != null">
+        picpath,
+      </if>
+      <if test="popularity != null">
+        popularity,
+      </if>
+      <if test="placeorigin != null">
+        placeorigin,
+      </if>
+      <if test="life != null">
+        life,
+      </if>
+      <if test="aliias != null">
+        aliias,
+      </if>
+      <if test="femaleheight != null">
+        femaleheight,
+      </if>
+      <if test="maleheight != null">
+        maleheight,
+      </if>
+      <if test="brifeintro != null">
+        brifeintro,
+      </if>
+      <if test="history != null">
+        history,
+      </if>
+      <if test="petcharacter != null">
+        petcharacter,
+      </if>
+      <if test="fitpeople != null">
+        fitpeople,
+      </if>
+      <if test="haircarding != null">
+        haircarding,
+      </if>
+      <if test="varietyvlaue != null">
+        varietyvlaue,
+      </if>
+      <if test="breed != null">
+        breed,
+      </if>
+      <if test="diseasepre != null">
+        diseasepre,
+      </if>
+      <if test="attention != null">
+        attention,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="varietyname != null">
+        #{varietyname,jdbcType=VARCHAR},
+      </if>
+      <if test="varietryentname != null">
+        #{varietryentname,jdbcType=VARCHAR},
+      </if>
+      <if test="picpath != null">
+        #{picpath,jdbcType=VARCHAR},
+      </if>
+      <if test="popularity != null">
+        #{popularity,jdbcType=INTEGER},
+      </if>
+      <if test="placeorigin != null">
+        #{placeorigin,jdbcType=VARCHAR},
+      </if>
+      <if test="life != null">
+        #{life,jdbcType=VARCHAR},
+      </if>
+      <if test="aliias != null">
+        #{aliias,jdbcType=VARCHAR},
+      </if>
+      <if test="femaleheight != null">
+        #{femaleheight,jdbcType=VARCHAR},
+      </if>
+      <if test="maleheight != null">
+        #{maleheight,jdbcType=VARCHAR},
+      </if>
+      <if test="brifeintro != null">
+        #{brifeintro,jdbcType=VARCHAR},
+      </if>
+      <if test="history != null">
+        #{history,jdbcType=VARCHAR},
+      </if>
+      <if test="petcharacter != null">
+        #{petcharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="fitpeople != null">
+        #{fitpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="haircarding != null">
+        #{haircarding,jdbcType=VARCHAR},
+      </if>
+      <if test="varietyvlaue != null">
+        #{varietyvlaue,jdbcType=VARCHAR},
+      </if>
+      <if test="breed != null">
+        #{breed,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasepre != null">
+        #{diseasepre,jdbcType=VARCHAR},
+      </if>
+      <if test="attention != null">
+        #{attention,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.work.domain.TbPetDetailedInfoExample" resultType="java.lang.Long">
+    select count(*) from tb_pet_detailed_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_pet_detailed_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varietyname != null">
+        varietyname = #{record.varietyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varietryentname != null">
+        varietryentname = #{record.varietryentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picpath != null">
+        picpath = #{record.picpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.popularity != null">
+        popularity = #{record.popularity,jdbcType=INTEGER},
+      </if>
+      <if test="record.placeorigin != null">
+        placeorigin = #{record.placeorigin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.life != null">
+        life = #{record.life,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliias != null">
+        aliias = #{record.aliias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.femaleheight != null">
+        femaleheight = #{record.femaleheight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maleheight != null">
+        maleheight = #{record.maleheight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brifeintro != null">
+        brifeintro = #{record.brifeintro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.history != null">
+        history = #{record.history,jdbcType=VARCHAR},
+      </if>
+      <if test="record.petcharacter != null">
+        petcharacter = #{record.petcharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fitpeople != null">
+        fitpeople = #{record.fitpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haircarding != null">
+        haircarding = #{record.haircarding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.varietyvlaue != null">
+        varietyvlaue = #{record.varietyvlaue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.breed != null">
+        breed = #{record.breed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseasepre != null">
+        diseasepre = #{record.diseasepre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attention != null">
+        attention = #{record.attention,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_pet_detailed_info
+    set id = #{record.id,jdbcType=VARCHAR},
+      varietyname = #{record.varietyname,jdbcType=VARCHAR},
+      varietryentname = #{record.varietryentname,jdbcType=VARCHAR},
+      picpath = #{record.picpath,jdbcType=VARCHAR},
+      popularity = #{record.popularity,jdbcType=INTEGER},
+      placeorigin = #{record.placeorigin,jdbcType=VARCHAR},
+      life = #{record.life,jdbcType=VARCHAR},
+      aliias = #{record.aliias,jdbcType=VARCHAR},
+      femaleheight = #{record.femaleheight,jdbcType=VARCHAR},
+      maleheight = #{record.maleheight,jdbcType=VARCHAR},
+      brifeintro = #{record.brifeintro,jdbcType=VARCHAR},
+      history = #{record.history,jdbcType=VARCHAR},
+      petcharacter = #{record.petcharacter,jdbcType=VARCHAR},
+      fitpeople = #{record.fitpeople,jdbcType=VARCHAR},
+      haircarding = #{record.haircarding,jdbcType=VARCHAR},
+      varietyvlaue = #{record.varietyvlaue,jdbcType=VARCHAR},
+      breed = #{record.breed,jdbcType=VARCHAR},
+      diseasepre = #{record.diseasepre,jdbcType=VARCHAR},
+      attention = #{record.attention,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.work.domain.TbPetDetailedInfo">
+    update tb_pet_detailed_info
+    <set>
+      <if test="varietyname != null">
+        varietyname = #{varietyname,jdbcType=VARCHAR},
+      </if>
+      <if test="varietryentname != null">
+        varietryentname = #{varietryentname,jdbcType=VARCHAR},
+      </if>
+      <if test="picpath != null">
+        picpath = #{picpath,jdbcType=VARCHAR},
+      </if>
+      <if test="popularity != null">
+        popularity = #{popularity,jdbcType=INTEGER},
+      </if>
+      <if test="placeorigin != null">
+        placeorigin = #{placeorigin,jdbcType=VARCHAR},
+      </if>
+      <if test="life != null">
+        life = #{life,jdbcType=VARCHAR},
+      </if>
+      <if test="aliias != null">
+        aliias = #{aliias,jdbcType=VARCHAR},
+      </if>
+      <if test="femaleheight != null">
+        femaleheight = #{femaleheight,jdbcType=VARCHAR},
+      </if>
+      <if test="maleheight != null">
+        maleheight = #{maleheight,jdbcType=VARCHAR},
+      </if>
+      <if test="brifeintro != null">
+        brifeintro = #{brifeintro,jdbcType=VARCHAR},
+      </if>
+      <if test="history != null">
+        history = #{history,jdbcType=VARCHAR},
+      </if>
+      <if test="petcharacter != null">
+        petcharacter = #{petcharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="fitpeople != null">
+        fitpeople = #{fitpeople,jdbcType=VARCHAR},
+      </if>
+      <if test="haircarding != null">
+        haircarding = #{haircarding,jdbcType=VARCHAR},
+      </if>
+      <if test="varietyvlaue != null">
+        varietyvlaue = #{varietyvlaue,jdbcType=VARCHAR},
+      </if>
+      <if test="breed != null">
+        breed = #{breed,jdbcType=VARCHAR},
+      </if>
+      <if test="diseasepre != null">
+        diseasepre = #{diseasepre,jdbcType=VARCHAR},
+      </if>
+      <if test="attention != null">
+        attention = #{attention,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.work.domain.TbPetDetailedInfo">
+    update tb_pet_detailed_info
+    set varietyname = #{varietyname,jdbcType=VARCHAR},
+      varietryentname = #{varietryentname,jdbcType=VARCHAR},
+      picpath = #{picpath,jdbcType=VARCHAR},
+      popularity = #{popularity,jdbcType=INTEGER},
+      placeorigin = #{placeorigin,jdbcType=VARCHAR},
+      life = #{life,jdbcType=VARCHAR},
+      aliias = #{aliias,jdbcType=VARCHAR},
+      femaleheight = #{femaleheight,jdbcType=VARCHAR},
+      maleheight = #{maleheight,jdbcType=VARCHAR},
+      brifeintro = #{brifeintro,jdbcType=VARCHAR},
+      history = #{history,jdbcType=VARCHAR},
+      petcharacter = #{petcharacter,jdbcType=VARCHAR},
+      fitpeople = #{fitpeople,jdbcType=VARCHAR},
+      haircarding = #{haircarding,jdbcType=VARCHAR},
+      varietyvlaue = #{varietyvlaue,jdbcType=VARCHAR},
+      breed = #{breed,jdbcType=VARCHAR},
+      diseasepre = #{diseasepre,jdbcType=VARCHAR},
+      attention = #{attention,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

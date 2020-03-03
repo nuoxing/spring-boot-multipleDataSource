@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.ExtendTbPetDetailedInfoMapper">
+    
+   <insert id="insert2" parameterType="com.work.domain.TbPetDetailedInfo">
+    insert into tb_pet_detailed_info (id, varietyname, varietryentname, 
+      picpath, popularity, placeorigin, 
+      life, aliias, femaleheight, 
+      maleheight, brifeintro, history, 
+      petcharacter, fitpeople, haircarding, 
+      varietyvlaue, breed, diseasepre, 
+      attention, createtime, updatetime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{varietyname,jdbcType=VARCHAR}, #{varietryentname,jdbcType=VARCHAR}, 
+      #{picpath,jdbcType=VARCHAR}, #{popularity,jdbcType=INTEGER}, #{placeorigin,jdbcType=VARCHAR}, 
+      #{life,jdbcType=VARCHAR}, #{aliias,jdbcType=VARCHAR}, #{femaleheight,jdbcType=VARCHAR}, 
+      #{maleheight,jdbcType=VARCHAR}, #{brifeintro,jdbcType=VARCHAR}, #{history,jdbcType=VARCHAR}, 
+      #{petcharacter,jdbcType=VARCHAR}, #{fitpeople,jdbcType=VARCHAR}, #{haircarding,jdbcType=VARCHAR}, 
+      #{varietyvlaue,jdbcType=VARCHAR}, #{breed,jdbcType=VARCHAR}, #{diseasepre,jdbcType=VARCHAR}, 
+      #{attention,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    
+</mapper>

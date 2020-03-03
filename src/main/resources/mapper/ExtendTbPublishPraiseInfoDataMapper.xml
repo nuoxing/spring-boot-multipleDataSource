@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.ExtendTbPublishPraiseInfoDataMapper">
+    
+    <select id="getPageData" resultType="map">
+        select 
+         t1.id, date_format(t1.createtime,'%Y-%m-%d %H:%i:%s') createtime ,t2.nickname,t1.userid
+         from tb_publish_praise_info_data t1 inner join tb_pet_user t2 on t1.userid=t2.openid
+         where t1.status='1'
+           <if test="time!=null and time!=''">
+              and t1.createtime&lt;str_to_date(#{time,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+           </if>
+           and t1.dynamictid=#{id,jdbcType=VARCHAR} 
+        order by t1.createtime asc
+    </select>
+    
+</mapper>

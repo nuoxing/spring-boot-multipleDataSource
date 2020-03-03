@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.ExtendTbGiftInfoMapper">
+  
+       
+    <select id="getGiftPageData" resultType="map">
+        select id,giftdesc,giftcompletepath from tb_gift_info where gifttype=#{gifttype,jdbcType=VARCHAR}
+        order by createtime desc 
+    </select>
+    
+</mapper>

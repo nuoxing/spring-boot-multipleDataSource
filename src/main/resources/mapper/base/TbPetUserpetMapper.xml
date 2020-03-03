@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.base.TbPetUserpetMapper">
+  <resultMap id="BaseResultMap" type="com.work.domain.TbPetUserpet">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="USERID" jdbcType="VARCHAR" property="USERID" />
+    <result column="IPTNAME" jdbcType="VARCHAR" property="IPTNAME" />
+    <result column="IPTTYPE" jdbcType="VARCHAR" property="IPTTYPE" />
+    <result column="IPTTYPENAME" jdbcType="VARCHAR" property="IPTTYPENAME" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="distance" jdbcType="VARCHAR" property="distance" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, USERID, IPTNAME, IPTTYPE, IPTTYPENAME, height, weight, age, sex, remark, distance, 
+    createtime
+  </sql>
+  <select id="selectByExample" parameterType="com.work.domain.TbPetUserpetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_pet_userpet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_pet_userpet
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_pet_userpet
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.work.domain.TbPetUserpetExample">
+    delete from tb_pet_userpet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.work.domain.TbPetUserpet">
+    insert into tb_pet_userpet (ID, USERID, IPTNAME, 
+      IPTTYPE, IPTTYPENAME, height, 
+      weight, age, sex, remark, 
+      distance, createtime)
+    values (#{ID,jdbcType=VARCHAR}, #{USERID,jdbcType=VARCHAR}, #{IPTNAME,jdbcType=VARCHAR}, 
+      #{IPTTYPE,jdbcType=VARCHAR}, #{IPTTYPENAME,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{distance,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.work.domain.TbPetUserpet">
+    insert into tb_pet_userpet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="USERID != null">
+        USERID,
+      </if>
+      <if test="IPTNAME != null">
+        IPTNAME,
+      </if>
+      <if test="IPTTYPE != null">
+        IPTTYPE,
+      </if>
+      <if test="IPTTYPENAME != null">
+        IPTTYPENAME,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="distance != null">
+        distance,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USERID != null">
+        #{USERID,jdbcType=VARCHAR},
+      </if>
+      <if test="IPTNAME != null">
+        #{IPTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="IPTTYPE != null">
+        #{IPTTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="IPTTYPENAME != null">
+        #{IPTTYPENAME,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.work.domain.TbPetUserpetExample" resultType="java.lang.Long">
+    select count(*) from tb_pet_userpet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_pet_userpet
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.USERID != null">
+        USERID = #{record.USERID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.IPTNAME != null">
+        IPTNAME = #{record.IPTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.IPTTYPE != null">
+        IPTTYPE = #{record.IPTTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.IPTTYPENAME != null">
+        IPTTYPENAME = #{record.IPTTYPENAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distance != null">
+        distance = #{record.distance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_pet_userpet
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      USERID = #{record.USERID,jdbcType=VARCHAR},
+      IPTNAME = #{record.IPTNAME,jdbcType=VARCHAR},
+      IPTTYPE = #{record.IPTTYPE,jdbcType=VARCHAR},
+      IPTTYPENAME = #{record.IPTTYPENAME,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      distance = #{record.distance,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.work.domain.TbPetUserpet">
+    update tb_pet_userpet
+    <set>
+      <if test="USERID != null">
+        USERID = #{USERID,jdbcType=VARCHAR},
+      </if>
+      <if test="IPTNAME != null">
+        IPTNAME = #{IPTNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="IPTTYPE != null">
+        IPTTYPE = #{IPTTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="IPTTYPENAME != null">
+        IPTTYPENAME = #{IPTTYPENAME,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        distance = #{distance,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.work.domain.TbPetUserpet">
+    update tb_pet_userpet
+    set USERID = #{USERID,jdbcType=VARCHAR},
+      IPTNAME = #{IPTNAME,jdbcType=VARCHAR},
+      IPTTYPE = #{IPTTYPE,jdbcType=VARCHAR},
+      IPTTYPENAME = #{IPTTYPENAME,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      distance = #{distance,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

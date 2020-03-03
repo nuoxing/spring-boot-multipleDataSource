@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.ExtendTbPublishDynamicInfoDataMapper">
+    
+    <select id="getPageData" resultType="map">
+        select 
+         t1.id, t1.content, date_format(t1.createtime,'%Y-%m-%d %H:%i:%s') createtime,t2.nickname
+         from tb_publish_dynamic_info_data t1 inner join tb_pet_user t2 on t1.userid=t2.openid
+         where t1.status='1'
+           <if test="time!=null and time!=''">
+              and t1.createtime&lt;str_to_date(#{time,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+           </if>
+        order by t1.createtime desc
+    </select>
+    
+    
+    <select id="getDynaminPageDataInLogin" resultType="map">
+       select w.*, concat( ordcol , focuse) ordercol2 from (
+        select 
+        t1.id, t1.content, date_format(t1.createtime,'%Y-%m-%d %H:%i:%s') createtime,t3.nickname,t3.picture,
+        t3.openid,date_format(t1.createtime,'%Y-%m-%d %H:%i') ordcol,t1.dom,
+        (case when exists(select * from tb_focus_user_info t2 where t2.userid=#{userId,jdbcType=VARCHAR} and t1.userid=t2.focuseduserid) then 'yes' else '' end) focuse
+        from tb_publish_dynamic_info_data t1 
+        left join tb_pet_user t3 on t1.userid=t3.openid
+        where t1.status='1' 
+           <if test="time!=null and time!=''">
+              and t1.createtime&lt;str_to_date(#{time,jdbcType=VARCHAR},'%Y-%m-%d %H:%i:%s')
+           </if>
+           <if test="self!=null and self!=''">
+              and t1.userid=#{userId,jdbcType=VARCHAR}
+           </if>
+           ) w
+         order by ordercol2  desc
+    </select>
+    
+    
+    <select id="getDynaminPageDataInNotLogin" resultType="map">
+          select 
+        t1.id, t1.content, date_format(t1.createtime,'%Y-%m-%d %H:%i:%s') createtime,
+        t1.userid
+        from tb_publish_dynamic_info_data t1 
+        where t1.status='1' and (longitude between #{longitude,jdbcType=DECIMAL}-#{range,jdbcType=INTEGER} and  #{longitude,jdbcType=DECIMAL}+#{range,jdbcType=INTEGER})
+        and (latitude between #{latitude,jdbcType=DECIMAL}-#{range,jdbcType=INTEGER} and  #{latitude,jdbcType=DECIMAL}+#{range,jdbcType=INTEGER})
+        order by t1.createtime  desc
+    </select>
+    
+</mapper>

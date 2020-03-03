@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.base.TbPublishCommentInfoDataMapper">
+  <resultMap id="BaseResultMap" type="com.work.domain.TbPublishCommentInfoData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="dynamictid" jdbcType="VARCHAR" property="dynamictid" />
+    <result column="senduserid" jdbcType="VARCHAR" property="senduserid" />
+    <result column="msgtype" jdbcType="VARCHAR" property="msgtype" />
+    <result column="replyeduserid" jdbcType="VARCHAR" property="replyeduserid" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dynamictid, senduserid, msgtype, replyeduserid, content, createtime, updatetime, 
+    status
+  </sql>
+  <select id="selectByExample" parameterType="com.work.domain.TbPublishCommentInfoDataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_publish_comment_info_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_publish_comment_info_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_publish_comment_info_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.work.domain.TbPublishCommentInfoDataExample">
+    delete from tb_publish_comment_info_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.work.domain.TbPublishCommentInfoData">
+    insert into tb_publish_comment_info_data (id, dynamictid, senduserid, 
+      msgtype, replyeduserid, content, 
+      createtime, updatetime, status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{dynamictid,jdbcType=VARCHAR}, #{senduserid,jdbcType=VARCHAR}, 
+      #{msgtype,jdbcType=VARCHAR}, #{replyeduserid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.work.domain.TbPublishCommentInfoData">
+    insert into tb_publish_comment_info_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dynamictid != null">
+        dynamictid,
+      </if>
+      <if test="senduserid != null">
+        senduserid,
+      </if>
+      <if test="msgtype != null">
+        msgtype,
+      </if>
+      <if test="replyeduserid != null">
+        replyeduserid,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamictid != null">
+        #{dynamictid,jdbcType=VARCHAR},
+      </if>
+      <if test="senduserid != null">
+        #{senduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null">
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="replyeduserid != null">
+        #{replyeduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.work.domain.TbPublishCommentInfoDataExample" resultType="java.lang.Long">
+    select count(*) from tb_publish_comment_info_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_publish_comment_info_data
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dynamictid != null">
+        dynamictid = #{record.dynamictid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senduserid != null">
+        senduserid = #{record.senduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgtype != null">
+        msgtype = #{record.msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyeduserid != null">
+        replyeduserid = #{record.replyeduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_publish_comment_info_data
+    set id = #{record.id,jdbcType=VARCHAR},
+      dynamictid = #{record.dynamictid,jdbcType=VARCHAR},
+      senduserid = #{record.senduserid,jdbcType=VARCHAR},
+      msgtype = #{record.msgtype,jdbcType=VARCHAR},
+      replyeduserid = #{record.replyeduserid,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.work.domain.TbPublishCommentInfoData">
+    update tb_publish_comment_info_data
+    <set>
+      <if test="dynamictid != null">
+        dynamictid = #{dynamictid,jdbcType=VARCHAR},
+      </if>
+      <if test="senduserid != null">
+        senduserid = #{senduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtype != null">
+        msgtype = #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="replyeduserid != null">
+        replyeduserid = #{replyeduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.work.domain.TbPublishCommentInfoData">
+    update tb_publish_comment_info_data
+    set dynamictid = #{dynamictid,jdbcType=VARCHAR},
+      senduserid = #{senduserid,jdbcType=VARCHAR},
+      msgtype = #{msgtype,jdbcType=VARCHAR},
+      replyeduserid = #{replyeduserid,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

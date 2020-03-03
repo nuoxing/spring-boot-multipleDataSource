@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.ExtendTbGiftGiveInfoMapper">
+
+    
+    <select id="getGiveGift" resultType="map">
+         select t2.giftdesc,date_format(t1.createtime,'%Y-%m-%d %H:%i:%s') createtime,
+         <if test="type=='self'">
+           t1.giveuserid userid,
+         </if>
+         <if test="type=='other'">
+           t1.begiveuserid userid,
+         </if>
+         t3.picture
+         from  
+         tb_gift_give_info t1 inner join tb_gift_info t2 on t1.giftid=t2.id 
+          <if test="type=='self'">
+           inner join  tb_pet_user t3 on t1.giveuserid=t3.openid
+         </if>
+         <if test="type=='other'">
+            inner join  tb_pet_user t3 on t1.begiveuserid=t3.openid
+         </if>
+         where t1.status='1'
+         <if test="type=='self'">
+           and  t1.giveuserid=#{userId,jdbcType=VARCHAR}
+         </if>
+         <if test="type=='other'">
+          and   t1.begiveuserid=#{userId,jdbcType=VARCHAR}
+         </if>
+         
+    </select>
+    
+</mapper>

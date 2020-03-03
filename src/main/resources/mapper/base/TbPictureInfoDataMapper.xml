@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.dao.base.TbPictureInfoDataMapper">
+  <resultMap id="BaseResultMap" type="com.work.domain.TbPictureInfoData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pictype" jdbcType="VARCHAR" property="pictype" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="relativeid" jdbcType="VARCHAR" property="relativeid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="completepath" jdbcType="VARCHAR" property="completepath" />
+    <result column="picsize" jdbcType="INTEGER" property="picsize" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pictype, path, status, relativeid, createtime, completepath, picsize
+  </sql>
+  <select id="selectByExample" parameterType="com.work.domain.TbPictureInfoDataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_picture_info_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_picture_info_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_picture_info_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.work.domain.TbPictureInfoDataExample">
+    delete from tb_picture_info_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.work.domain.TbPictureInfoData">
+    insert into tb_picture_info_data (id, pictype, path, 
+      status, relativeid, createtime, 
+      completepath, picsize)
+    values (#{id,jdbcType=VARCHAR}, #{pictype,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{relativeid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{completepath,jdbcType=VARCHAR}, #{picsize,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.work.domain.TbPictureInfoData">
+    insert into tb_picture_info_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pictype != null">
+        pictype,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="relativeid != null">
+        relativeid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="completepath != null">
+        completepath,
+      </if>
+      <if test="picsize != null">
+        picsize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pictype != null">
+        #{pictype,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeid != null">
+        #{relativeid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completepath != null">
+        #{completepath,jdbcType=VARCHAR},
+      </if>
+      <if test="picsize != null">
+        #{picsize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.work.domain.TbPictureInfoDataExample" resultType="java.lang.Long">
+    select count(*) from tb_picture_info_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_picture_info_data
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictype != null">
+        pictype = #{record.pictype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null">
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relativeid != null">
+        relativeid = #{record.relativeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.completepath != null">
+        completepath = #{record.completepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picsize != null">
+        picsize = #{record.picsize,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_picture_info_data
+    set id = #{record.id,jdbcType=VARCHAR},
+      pictype = #{record.pictype,jdbcType=VARCHAR},
+      path = #{record.path,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      relativeid = #{record.relativeid,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      completepath = #{record.completepath,jdbcType=VARCHAR},
+      picsize = #{record.picsize,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.work.domain.TbPictureInfoData">
+    update tb_picture_info_data
+    <set>
+      <if test="pictype != null">
+        pictype = #{pictype,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeid != null">
+        relativeid = #{relativeid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completepath != null">
+        completepath = #{completepath,jdbcType=VARCHAR},
+      </if>
+      <if test="picsize != null">
+        picsize = #{picsize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.work.domain.TbPictureInfoData">
+    update tb_picture_info_data
+    set pictype = #{pictype,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      relativeid = #{relativeid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      completepath = #{completepath,jdbcType=VARCHAR},
+      picsize = #{picsize,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
